@@ -12,5 +12,10 @@
 
     </div>
     @vite(['resources/css/app.css','resources/js/app.js'])
+    @if(session('status'))
+    <div>
+        {{session('status')}}
+    </div>
+    @endif
 </body>
 </html>

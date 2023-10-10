@@ -22,16 +22,39 @@ class TodoController extends Controller
      */
     public function create()
     {
-        //
+        return view('todos.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
-        //
+
+        // dd($request->title);
+
+        //validation rules
+        $rules = [
+            'title' => 'required|string|unique:todos,title|min:2|max:150',
+            'body' => 'required|string|min:5|max:1000',
+        ];
+
+        $messages = [
+        'title.unique' => 'Title must be unique'
+        ];
+
+        $request->validate($rules, $messages);
+
+        $todo = new Todo;
+        $todo->title = $request->title;
+        $todo->body = $request->body;
+        $todo->save();
+
+        return redirect()->route('todo.index')->with('status', 'Created a new Todo');
     }
+
+
+
 
     /**
      * Display the specified resource.
