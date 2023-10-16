@@ -61,7 +61,10 @@ class TodoController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $todo = Todo::findOrFail($id);
+        return view('todos.show', [
+        'todo' => $todo
+        ]);
     }
 
     /**
@@ -69,7 +72,10 @@ class TodoController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $todo = Todo::findOrFail($id);
+        return view('todos.edit', [
+            'todo' => $todo
+        ]);
     }
 
     /**
@@ -77,14 +83,36 @@ class TodoController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $rules = [
+            'title' => "required|string|unique:todos,title,{$id}|min:2|max:150",
+            'body' => 'required|string|min:5|max:1000',
+        ];
+
+        $messages = [
+        'title.unique' => 'Title must be unique'
+        ];
+
+        $request->validate($rules, $messages);
+
+        $todo = Todo::findOrFail($id);
+        $todo->title = $request->title;
+        $todo->body = $request->body;
+        $todo->save();
+
+        return redirect()->route('todos.index')->with('status', 'Updated Todo');
     }
+
+
+    
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        //
+        $todo = Todo::findOrFail($id);
+        $todo->delete();
+
+        return redirect()->route('todos.index')->with('status', 'Selected Todo deleted successfully!');
     }
 }
