@@ -1,7 +1,23 @@
-@extends('layouts.app')
+@extends('layouts.myApp')
+
 @section('content')
 
 <h3>Create Todo</h3>
+
+{{-- @if ($errors->any())
+
+<div class="alert alert-danger">
+    <ul>
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@if($errors->has('title'))
+<span> {{ $errors->first('title')}} </span>
+@endif --}}
+
+
 <form action="{{route('todos.store')}}" method="POST">
     @csrf
     <div>
@@ -21,4 +37,5 @@
     </div>
     <button type="submit">Create</button>
 </form>
+
 @endsection

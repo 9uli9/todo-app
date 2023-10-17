@@ -1,4 +1,12 @@
-@extends('layouts.app')
+@extends('layouts.myApp')
+
+@section('header')
+<h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+    {{ __('To-Dos') }}
+</h2>
+@endsection
+
+
 @section('content')
 
 <h2>Todos</h2>
