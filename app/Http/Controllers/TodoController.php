@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Todo;
+use Illuminate\Http\RedirectResponse;
 
 class TodoController extends Controller
 {
@@ -31,7 +32,7 @@ class TodoController extends Controller
     public function store(Request $request): RedirectResponse
     {
 
-        // dd($request->title);
+        
 
         //validation rules
         $rules = [
@@ -50,7 +51,7 @@ class TodoController extends Controller
         $todo->body = $request->body;
         $todo->save();
 
-        return redirect()->route('todo.index')->with('status', 'Created a new Todo');
+        return redirect()->route('todos.index')->with('status', 'Created a new Todo');
     }
 
 
