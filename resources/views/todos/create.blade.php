@@ -35,7 +35,7 @@
         <span> {{$errors->first('body')}}</span>
         @endif
     </div>
-    <button type="submit">Create</button>
+    <button type="submit" >Submit</button>
 </form>
 
 @endsection
