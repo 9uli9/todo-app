@@ -19,7 +19,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/todos/mine', [TodoController::class, 'getMyTodos']);
 Route::resource('todos', TodoController::class);
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');

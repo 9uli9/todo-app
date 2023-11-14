@@ -12,6 +12,16 @@ class TodoController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+
+     public function getMyTodos(){
+        $todos = Todo::where('user_id', '=',Auth::id())->get();
+
+        return view('todos.index',[
+            'todos' =>$todos
+        ]
+    );
+     }
     public function index()
     {
         $todos = Todo::orderBy('created_at', 'desc')->paginate(8);
